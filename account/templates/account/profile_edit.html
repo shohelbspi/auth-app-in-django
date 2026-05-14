@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Updata </title>
+</head>
+<body>
+
+    {% if messages %} 
+        {% for message in messages %}
+            <h4 {% if message.tags%} class="{{message.tags}}" {% endif %}>{{message}}</h4>
+        {% endfor %}
+    {% endif %}
+
+    </br>
+
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors%}
+            {{error}}
+        {%endfor%}
+    {% endif %}
+
+    </br>
+    </br>
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        {% for fm in form%}
+            {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br><br>
+        {% endfor %}
+
+        <input type="submit" value="Submit">
+
+    </form>
+    <br/>
+
+    <a href="{% url 'profile' %}">Back Profile</a>
+    
+</body>
+</html>
